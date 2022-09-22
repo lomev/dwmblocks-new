@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Prints all batteries, their percentage remaining and an emoji corresponding
+# to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
+
+case $BLOCK_BUTTON in
+	1) notify-send "$(acpi -b | awk -F ': |, ' '{printf "%s\n%s\n", $2, $4}')" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+fgcolor="^c#cc6666^"
+bgcolor="^b#222222^"
+
+battery="/sys/class/power_supply/BAT0"
+capacity="$(cat "$battery/capacity" 2>&1)"
+if [ "$capacity" -gt 90 ]; then
+	status=" "
+elif [ "$capacity" -gt 60 ]; then
+	status=" "
+elif [ "$capacity" -gt 40 ]; then
+	status=" "
+elif [ "$capacity" -gt 10 ]; then
+	status=" "
+else
+	status=" "
+fi
+
+# Prints the info
+#echo "$bgcolor$fgcolor $status$capacity% "
+echo "$fgcolor$status$capacity%"

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e neomutt ;;
+	2) setsid -f mw -Y >/dev/null ;;
+	3) notify-send "📬 Mail module" "\- Shows unread mail
+- Shows 🔃 if syncing mail
+- Left click opens neomutt
+- Middle click syncs mail" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+maildirs="$HOME/.local/share/mail/*/INBOX/new/"
+mails="$(find $maildirs -type f | wc -l)"
+icon=""
+fgcolor="^c#8abeb7^"
+bgcolor="^b#111111^"
+
+#echo "$icon$mails"
+#echo "$bgcolor$fgcolor $icon$mails "
+echo "$fgcolor$icon$mails"

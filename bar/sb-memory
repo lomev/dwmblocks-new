@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+ 
+fgcolor="^c#81a2be^"
+bgcolor="^b#111111^"
+icon=""
+
+#echo "$icon$(free --mebi | awk 'NR==2 {printf ("%2.2fG\n", ($3 / 1024))}')"
+#echo "$bgcolor$fgcolor $icon $(free --mebi | awk 'NR==2 {printf ("%2.2fG\n", ($3 / 1024))}') "
+echo "$fgcolor$icon$(free --mebi | awk 'NR==2 {printf ("%2.2fG\n", ($3 / 1024))}')"

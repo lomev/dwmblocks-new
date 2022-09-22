@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) 	notify-send -i calendar -h string:x-canonical-private-synchronous:date "This Month" \
+        "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/")" \
+        && notify-send "Appointments" "$(calcurse -d3)"
+    ;;
+    2) "$TERMINAL" -e calcurse ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+icon=""
+fgcolor="^c#ffffff^"
+bgcolor="^b#111111^"
+
+#echo "$bgcolor$fgcolor $(date '+%R') "
+echo "$fgcolor$(date '+%R')"

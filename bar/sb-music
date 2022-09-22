@@ -1,0 +1,24 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) mpc prev && pkill -RTMIN+18 dwmblocks;;
+	2) mpc toggle && pkill -RTMIN+18 dwmblocks;;
+	3) mpc next && pkill -RTMIN+18 dwmblocks;;
+	4) mpc seek +5 ;;
+	5) mpc seek -5 ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+icon=""
+fgcolor="^c#de935f^"
+bgcolor="^b#222222^"
+track="$(mpc current)"
+artist="${track%%- *}"
+title="${track#*- }"
+
+mpc | grep -q "\[paused\]" && icon=" "
+
+[ -z "$track" ] && exit
+
+#echo "$bgcolor$fgcolor $icon$track"
+echo "$fgcolor$icon$track"

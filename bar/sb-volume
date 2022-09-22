@@ -1,0 +1,28 @@
+#!/bin/sh
+
+fgcolor="^c#b5bd68^"
+bgcolor="^b#111111^"
+
+case $BLOCK_BUTTON in
+	1) $TERMINAL -e pulsemixer ;;
+	2) pamixer -t ;;
+	4) pamixer -i 3 ;;
+	5) pamixer -d 3 ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+[ "$(pamixer --get-mute)" = true ] && echo "$fgcolor🔇" && exit
+
+vol=$(pamixer --get-volume)
+
+if [ "$vol" -gt 40 ]; then
+	icon=" "
+elif [ "$vol" -gt 15 ]; then
+	icon=" "
+else
+	icon=" "
+fi
+
+#echo "$icon$vol%"
+#echo "$bgcolor$fgcolor $icon$vol% "
+echo "$fgcolor$icon$vol%"
